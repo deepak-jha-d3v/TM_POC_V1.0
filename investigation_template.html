@@ -358,6 +358,36 @@
 
   .disp-btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
   .rationale-note{font-size:12px;color:var(--muted);margin-top:8px;}
+
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+  .narrative-box{width:100%;margin-top:8px;border:1px solid var(--line-strong);border-radius:8px;padding:10px 12px;
+    font-family:var(--sans);font-size:13px;background:var(--panel-2);min-height:84px;resize:vertical;}
+  .narrative-box:focus{outline:2px solid var(--accent-soft);border-color:var(--accent);background:#fff;}
+  .narrative-box:disabled{background:var(--panel-2);color:var(--ink-soft);}
+  .field-label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;display:block;margin-top:14px;margin-bottom:6px;}
+  .submit-btn{margin-top:2px;background:var(--navy);color:#fff;border-color:var(--navy);}
+  .submit-btn:disabled{background:#c7cbd8;border-color:#c7cbd8;color:#fff;opacity:1;}
+  .decision-locked-banner{font-size:12.5px;background:var(--teal-bg);color:var(--teal);border:1px solid #bfe6d7;
+    border-radius:8px;padding:9px 13px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .decision-amend-banner{font-size:12.5px;background:var(--amber-bg);color:var(--amber);border:1px solid #f1d9ac;
+    border-radius:8px;padding:9px 13px;margin-bottom:12px;}
+  .amend-link{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--teal);background:#fff;
+    border:1px solid #bfe6d7;border-radius:14px;padding:3px 11px;cursor:pointer;}
+  .amend-link:hover{background:var(--teal-bg);}
+  .prior-decisions{margin-top:6px;}
+  .print-btn{font-family:var(--mono);font-size:11.5px;font-weight:600;color:#dbe2f5;background:rgba(255,255,255,.08);
+    padding:8px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.12);cursor:pointer;white-space:nowrap;}
+  .print-btn:hover{background:rgba(255,255,255,.16);}
+
+  @media print{
+    .queue, .print-btn, .audit-link, header .stat-strip, .decision-row, .submit-btn, .amend-link,
+    #analystFeedbackPanel select, #analystFeedbackPanel textarea, #analystFeedbackPanel .field-label{ display:none !important; }
+    .layout{ display:block; height:auto; }
+    main{ overflow:visible; padding:8px 4px; }
+    .accordion-collapse{ display:block !important; height:auto !important; }
+    .panel, .workflow-panel{ box-shadow:none; break-inside:avoid; }
+    body{ background:#fff; }
+  }
 </style>
 </head>
 <body>
@@ -371,6 +401,7 @@
     </div>
   </div>
   <div class="stat-strip" id="statStrip"></div>
+  <button class="print-btn" onclick="printCasePacket()" title="Print or save the full case file as a PDF — for SAR referral or escalation packets">🖨️ Print case packet</button>
   <div class="audit-link" id="auditLinkStatus" title="Every submitted decision is written straight to this file — no manual export needed">
     <span class="audit-link-dot" id="auditLinkDot"></span>
     <span id="auditLinkText">Audit log not yet linked</span>
@@ -396,7 +427,7 @@ const ALERTS = __ALERTS_JSON__;
 const RULE_CATALOG = __RULE_CATALOG_JSON__;
 const INV_DATA = __INVESTIGATION_JSON__; // customer_id -> full investigation workspace bundle
 
-const decisions = {}; // alert_id -> {action, note, override, timestamp}
+const decisions = {}; // alert_id -> {action, note, narrative, override, amended, history[], timestamp} -- only set once SUBMITTED
 const notesState = {}; // alert_id -> {summary, observations, evidence, decision, recommendation, comments}
 let selectedId = ALERTS.length ? ALERTS[0].alert_id : null;
 let searchTerm = '';
@@ -408,6 +439,30 @@ let channelMenuOpen = false;
 const RISK_SCORE_RANGES = {low:'score 0–49', medium:'score 50–69', high:'score 70–100'};
 let openAccordions = new Set(); // rule_ids open for current alert
 const chartInstances = {}; // canvas id -> Chart instance, torn down before re-render
+
+// Staging state for the current alert's disposition -- a click on Close / Request Info /
+// Escalate only stages a choice; nothing is committed (or written to the audit file) until
+// Submit Decision is clicked. Reset whenever the analyst switches alerts.
+let stagedAction = null;
+let draftNote = '';
+let draftNarrative = '';
+
+const DECISIONS_STORAGE_KEY = 'l1_tm_poc_decisions_v1';
+function loadDecisionsFromStorage(){
+  try{
+    const raw = localStorage.getItem(DECISIONS_STORAGE_KEY);
+    if(raw) Object.assign(decisions, JSON.parse(raw));
+  } catch(err){
+    console.error('Failed to load previously submitted decisions from localStorage:', err);
+  }
+}
+function saveDecisionsToStorage(){
+  try{
+    localStorage.setItem(DECISIONS_STORAGE_KEY, JSON.stringify(decisions));
+  } catch(err){
+    console.error('Failed to save decisions to localStorage:', err);
+  }
+}
 
 function getNotes(alertId){
   if(!notesState[alertId]) notesState[alertId] = {summary:'',observations:'',evidence:'',decision:'',recommendation:''};
@@ -542,6 +597,9 @@ function renderQueue(){
 function selectAlert(id){
   selectedId = id;
   openAccordions = new Set();
+  stagedAction = null;
+  draftNote = '';
+  draftNarrative = '';
   renderQueue();
   renderMain();
 }
@@ -1142,21 +1200,51 @@ const DECISION_RATIONALE_OPTIONS = [
 
 function buildAnalystFeedbackPanel(a, inv, decided){
   const rec = inv.recommendation;
-  const optsHtml = DECISION_RATIONALE_OPTIONS.map(o=>`<option value="${o}" ${decided?.note===o?'selected':''}>${o}</option>`).join('');
+  const locked = !!decided && stagedAction===null;      // submitted, not currently being amended
+  const amending = !!decided && stagedAction!==null;     // submitted before, re-opened via "Amend decision"
+  const activeAction = stagedAction!==null ? stagedAction : (decided ? decided.action : null);
+  const currentNote = stagedAction!==null ? draftNote : (decided?.note || '');
+  const currentNarrative = stagedAction!==null ? draftNarrative : (decided?.narrative || '');
+
+  const optsHtml = DECISION_RATIONALE_OPTIONS.map(o=>`<option value="${o}" ${currentNote===o?'selected':''}>${o}</option>`).join('');
+
+  const btn = (action, cls, label) =>
+    `<button class="btn ${cls} ${activeAction===action?'active-choice':''}" ${locked?'disabled':''} onclick="stage('${action}')">${label}</button>`;
+
+  const priorHistoryHtml = (decided && decided.history && decided.history.length) ? `
+    <div class="prior-decisions">
+      <div class="subhead" style="margin-top:16px">Decision history (${decided.history.length} prior submission${decided.history.length>1?'s':''})</div>
+      ${decided.history.map(h=>`<div class="log-entry"><b>${h.action.replace(/_/g,' ')}</b> at ${h.timestamp}${h.note?' — "'+h.note+'"':''}</div>`).join('')}
+    </div>` : '';
+
   return `<div class="panel" id="analystFeedbackPanel">
     <h2>L1 Analyst Feedback &amp; Disposition (human-in-the-loop)</h2>
     <p class="rationale-note" style="margin-bottom:12px">System recommendation: <b>${rec.decision}</b> · AI suggested action: <b>${a.ai_copilot.suggested_action.replace(/_/g,' ')}</b>. Record your own decision and rationale below — this is the analyst's independent judgment call, not just an acceptance of the system output.</p>
+
+    ${locked ? `<div class="decision-locked-banner">✓ Decision submitted — <b>${decided.action.replace(/_/g,' ')}</b> at ${decided.timestamp}. <button type="button" class="amend-link" onclick="amendDecision()">Amend decision</button></div>` : ''}
+    ${amending ? `<div class="decision-amend-banner">Amending the previous decision (originally <b>${decided.action.replace(/_/g,' ')}</b> at ${decided.timestamp}). Submitting will record this as an amendment and keep the prior decision in the audit trail.</div>` : ''}
+
     <div class="decision-row">
-      <button class="btn close ${decided?.action==='close_false_positive'?'active-choice':''}" onclick="decide('close_false_positive')">Close — False Positive</button>
-      <button class="btn info ${decided?.action==='request_more_info'?'active-choice':''}" onclick="decide('request_more_info')">Request More Info</button>
-      <button class="btn escalate ${decided?.action==='escalate_to_l2'?'active-choice':''}" onclick="decide('escalate_to_l2')">Escalate to L2 / SAR Review</button>
+      ${btn('close_false_positive','close','Close — False Positive')}
+      ${btn('request_more_info','info','Request More Info')}
+      ${btn('escalate_to_l2','escalate','Escalate to L2 / SAR Review')}
     </div>
-    <label style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;display:block;margin-top:14px;margin-bottom:6px">Analyst Rationale</label>
-    <select id="noteBox" class="decision-rationale">
-      <option value="" ${!decided?.note?'selected':''} disabled>Select a rationale — mandatory when closing as false positive or overriding the AI/system recommendation</option>
+
+    <label class="field-label">Analyst Rationale</label>
+    <select id="noteBox" class="decision-rationale" ${locked?'disabled':''}>
+      <option value="" ${!currentNote?'selected':''} disabled>Select a rationale — mandatory when closing as false positive or overriding the AI/system recommendation</option>
       ${optsHtml}
     </select>
-    <div id="logArea" style="margin-top:14px">${decided ? `<div class="log-entry"><b>${decided.action.replace(/_/g,' ')}</b> by L1 Analyst (demo) at ${decided.timestamp}${decided.note? ' — "'+decided.note+'"':''}${decided.override? ' <span style="color:var(--amber)">[override of system recommendation]</span>':''}</div>` : '<div class="log-empty">No decision recorded yet for this alert.</div>'}</div>
+
+    <label class="field-label">Case Narrative (free text)${activeAction==='escalate_to_l2' ? ' — <span style="color:var(--red)">required for escalation</span>' : ' — <span style="color:var(--muted);text-transform:none;letter-spacing:0;font-weight:500">optional, recommended for the case file</span>'}</label>
+    <textarea id="narrativeBox" class="narrative-box" ${locked?'disabled':''} placeholder="Describe the transaction pattern, evidence reviewed, and basis for this disposition in your own words.">${currentNarrative}</textarea>
+
+    <div style="margin-top:14px">
+      <button class="btn submit-btn" onclick="submitDecision()" ${stagedAction===null?'disabled':''}>${amending?'Submit amendment':'Submit decision'}</button>
+    </div>
+
+    <div id="logArea" style="margin-top:14px">${decided ? `<div class="log-entry"><b>${decided.action.replace(/_/g,' ')}</b> by L1 Analyst (demo) at ${decided.timestamp}${decided.note? ' — "'+decided.note+'"':''}${decided.override? ' <span style="color:var(--amber)">[override of system recommendation]</span>':''}${decided.amended? ' <span style="color:var(--accent)">[amended]</span>':''}${decided.narrative? '<br><span style="color:var(--ink-soft)">Narrative: '+decided.narrative+'</span>':''}</div>` : '<div class="log-empty">No decision recorded yet for this alert.</div>'}</div>
+    ${priorHistoryHtml}
   </div>`;
 }
 
@@ -1271,7 +1359,8 @@ function renderMain(preserveScroll){
 
 const AUDIT_HEADERS = ['alert_id','customer_id','customer_name','customer_risk_rating','customer_country',
                         'rules_triggered','ai_base_score','ai_confidence_score','ai_confidence_label',
-                        'ai_suggested_action','analyst_decision','analyst_note','override_of_ai','decision_timestamp'];
+                        'ai_suggested_action','analyst_decision','analyst_note','analyst_narrative',
+                        'override_of_ai','amended_decision','decision_timestamp'];
 let auditFileHandle = null;                          // FileSystemFileHandle, once the analyst has linked/created L1_Audit_tracker.csv
 const auditFsaSupported = 'showSaveFilePicker' in window;
 const auditRowsForFallbackDownload = [];              // used only in browsers without the File System Access API
@@ -1288,7 +1377,7 @@ function auditRowFor(a, decided){
   return [
     a.alert_id, a.customer_id, a.customer_name, a.customer_risk_rating, a.customer_country,
     ruleList, ai.base_score, ai.confidence_score, ai.confidence_label, ai.suggested_action,
-    decided.action, decided.note, decided.override, decided.timestamp
+    decided.action, decided.note, decided.narrative || '', decided.override, decided.amended ? 'Y' : 'N', decided.timestamp
   ].map(csvEscape).join(',');
 }
 
@@ -1346,20 +1435,88 @@ async function persistAuditRow(a, decided){
   }
 }
 
-function decide(action){
+// Stage a disposition choice -- does NOT commit or write to the audit file. Capture
+// whatever the analyst has typed/selected so far so the re-render (which rebuilds the
+// panel's innerHTML) doesn't wipe it out before Submit is clicked.
+function stage(action){
   const a = ALERTS.find(x=>x.alert_id===selectedId);
+  if(!a) return;
+  const noteEl = document.getElementById('noteBox');
+  const narrEl = document.getElementById('narrativeBox');
+  if(noteEl) draftNote = noteEl.value;
+  if(narrEl) draftNarrative = narrEl.value;
+  stagedAction = action;
+  renderMain(true);
+}
+
+// Re-opens an already-submitted alert for editing. The prior decision is kept (and shown
+// under "Decision history") until the analyst explicitly submits the amendment.
+function amendDecision(){
+  const a = ALERTS.find(x=>x.alert_id===selectedId);
+  const decided = a && decisions[a.alert_id];
+  if(!decided) return;
+  stagedAction = decided.action;
+  draftNote = decided.note || '';
+  draftNarrative = decided.narrative || '';
+  renderMain(true);
+}
+
+function submitDecision(){
+  const a = ALERTS.find(x=>x.alert_id===selectedId);
+  if(!a || stagedAction===null) return;
   const note = document.getElementById('noteBox').value.trim();
-  if(action==='close_false_positive' && !note){
+  const narrative = document.getElementById('narrativeBox').value.trim();
+  const override = stagedAction !== a.ai_copilot.suggested_action;
+
+  if(stagedAction==='close_false_positive' && !note){
     alert('A rationale is required to close an alert as a false positive. Please select one before submitting.');
     return;
   }
-  const override = action !== a.ai_copilot.suggested_action;
-  decisions[a.alert_id] = { action, note, override, timestamp: new Date().toISOString().slice(0,19).replace('T',' ') };
+  if(override && !note){
+    alert('A rationale is required when your decision overrides the AI/system recommendation. Please select one before submitting.');
+    return;
+  }
+  if(stagedAction==='escalate_to_l2' && !narrative){
+    alert('A case narrative is required when escalating to L2 / SAR review. Please describe the basis for escalation before submitting.');
+    return;
+  }
+
+  const prior = decisions[a.alert_id];
+  const history = prior ? [...(prior.history||[]), {action:prior.action, note:prior.note, narrative:prior.narrative, override:prior.override, timestamp:prior.timestamp}] : [];
+
+  decisions[a.alert_id] = {
+    action: stagedAction, note, narrative, override,
+    amended: !!prior, history,
+    timestamp: new Date().toISOString().slice(0,19).replace('T',' '),
+  };
+  stagedAction = null;
+  draftNote = '';
+  draftNarrative = '';
+  saveDecisionsToStorage();
   renderQueue();
   renderMain();
   persistAuditRow(a, decisions[a.alert_id]);
 }
 
+// Force every accordion section open so the printed/PDF case packet includes the full
+// investigation record, then restore whichever sections were collapsed beforehand.
+let printForcedOpenEls = [];
+function printCasePacket(){
+  printForcedOpenEls = [];
+  document.querySelectorAll('#invAccordion .accordion-collapse').forEach(el=>{
+    if(!el.classList.contains('show')){
+      el.classList.add('show');
+      printForcedOpenEls.push(el);
+    }
+  });
+  window.print();
+}
+window.addEventListener('afterprint', ()=>{
+  printForcedOpenEls.forEach(el=>el.classList.remove('show'));
+  printForcedOpenEls = [];
+});
+
+loadDecisionsFromStorage();
 renderStatStrip();
 renderFilterControls();
 renderQueue();
