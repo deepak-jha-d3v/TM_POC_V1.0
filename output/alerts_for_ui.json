@@ -244,7 +244,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-B59EF2",
+        "buyer_id": "BUYER-963A08",
         "is_conversion": false
       },
       {
@@ -258,7 +258,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-0C2930",
+        "buyer_id": "BUYER-DF8316",
         "is_conversion": false
       },
       {
@@ -286,7 +286,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-9B6910",
+        "buyer_id": "BUYER-EAF028",
         "is_conversion": false
       },
       {
@@ -323,7 +323,7 @@
         "currency": "SOL",
         "direction": "debit",
         "channel": "crypto",
-        "counterparty": "0xb669e66eb04246f083b49d1c38c83822",
+        "counterparty": "0x1230415d4cbb43429aa9c69c163037ab",
         "counterparty_country": "DE",
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
@@ -429,7 +429,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-765DD2",
+        "buyer_id": "BUYER-7E33A8",
         "is_conversion": false
       },
       {
@@ -443,7 +443,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-003E35",
+        "buyer_id": "BUYER-13E313",
         "is_conversion": false
       },
       {
@@ -471,7 +471,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-7AB630",
+        "buyer_id": "BUYER-6D65D9",
         "is_conversion": false
       },
       {
@@ -485,7 +485,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-9224E2",
+        "buyer_id": "BUYER-AD7147",
         "is_conversion": false
       }
     ]
@@ -581,7 +581,7 @@
         "currency": "SOL",
         "direction": "debit",
         "channel": "crypto",
-        "counterparty": "0xdda5e4fd299b437eadc5a0a73dcd41ff",
+        "counterparty": "0xbee3daaa8d004a62a4266f81d0e1f174",
         "counterparty_country": "FR",
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
@@ -780,7 +780,7 @@
         "currency": "BTC",
         "direction": "debit",
         "channel": "crypto",
-        "counterparty": "0xd75a2c89549749e08ed136fbaa53a712",
+        "counterparty": "0xfab0089741e34f42b933fd0b31089243",
         "counterparty_country": "CA",
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
@@ -1015,7 +1015,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-1076D7",
+        "buyer_id": "BUYER-3F695E",
         "is_conversion": false
       },
       {
@@ -1029,7 +1029,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-18B80B",
+        "buyer_id": "BUYER-E087D9",
         "is_conversion": false
       },
       {
@@ -1057,7 +1057,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-3B3943",
+        "buyer_id": "BUYER-4F808C",
         "is_conversion": false
       },
       {
@@ -1071,7 +1071,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-E65032",
+        "buyer_id": "BUYER-B12700",
         "is_conversion": false
       },
       {
@@ -1113,7 +1113,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-F9FEEC",
+        "buyer_id": "BUYER-654A7A",
         "is_conversion": false
       }
     ]
@@ -1186,7 +1186,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-1EBE31",
+        "buyer_id": "BUYER-8C78E9",
         "is_conversion": false
       },
       {
@@ -1242,7 +1242,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-AEF70A",
+        "buyer_id": "BUYER-F9ED53",
         "is_conversion": false
       },
       {
@@ -1270,7 +1270,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-0C597C",
+        "buyer_id": "BUYER-66CF42",
         "is_conversion": false
       }
     ]
@@ -1643,7 +1643,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-00AB71",
+        "buyer_id": "BUYER-330A82",
         "is_conversion": false
       },
       {
@@ -1657,7 +1657,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-53AF3F",
+        "buyer_id": "BUYER-11E26E",
         "is_conversion": false
       },
       {
@@ -1814,7 +1814,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-49BFAD",
+        "buyer_id": "BUYER-A934B7",
         "is_conversion": false
       },
       {
@@ -1828,7 +1828,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-1637C9",
+        "buyer_id": "BUYER-F6A4F8",
         "is_conversion": false
       },
       {
@@ -1957,7 +1957,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-41ABAE",
+        "buyer_id": "BUYER-4217C5",
         "is_conversion": false
       },
       {
@@ -1971,7 +1971,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-20CC08",
+        "buyer_id": "BUYER-FEA326",
         "is_conversion": false
       },
       {
@@ -1999,7 +1999,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-B4BEAD",
+        "buyer_id": "BUYER-C07149",
         "is_conversion": false
       },
       {
@@ -2271,7 +2271,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-12B295",
+        "buyer_id": "BUYER-DC7C0E",
         "is_conversion": false
       },
       {
@@ -2299,7 +2299,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-5A2829",
+        "buyer_id": "BUYER-5E5DDB",
         "is_conversion": false
       },
       {
@@ -2327,7 +2327,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-D9BC22",
+        "buyer_id": "BUYER-3B8778",
         "is_conversion": false
       },
       {
@@ -2770,7 +2770,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-E3F736",
+        "buyer_id": "BUYER-D00A01",
         "is_conversion": false
       },
       {
@@ -2784,7 +2784,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-6B7496",
+        "buyer_id": "BUYER-D283C9",
         "is_conversion": false
       },
       {
@@ -2798,7 +2798,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-CCDDF5",
+        "buyer_id": "BUYER-7DA7CB",
         "is_conversion": false
       },
       {
@@ -2840,7 +2840,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-8E36DB",
+        "buyer_id": "BUYER-1719BF",
         "is_conversion": false
       }
     ]
@@ -2889,7 +2889,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-951E38",
+        "buyer_id": "BUYER-3336DD",
         "is_conversion": false
       },
       {
@@ -2903,7 +2903,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-298682",
+        "buyer_id": "BUYER-86AC05",
         "is_conversion": false
       },
       {
@@ -2917,7 +2917,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-BF72BD",
+        "buyer_id": "BUYER-6B917C",
         "is_conversion": false
       },
       {
@@ -2931,7 +2931,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-CE3D4D",
+        "buyer_id": "BUYER-199A0C",
         "is_conversion": false
       },
       {
@@ -3267,7 +3267,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-1B0565",
+        "buyer_id": "BUYER-E05721",
         "is_conversion": false
       },
       {
@@ -3281,7 +3281,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-C55A90",
+        "buyer_id": "BUYER-67D1B8",
         "is_conversion": false
       }
     ]
@@ -3505,7 +3505,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-711F1E",
+        "buyer_id": "BUYER-7E13A4",
         "is_conversion": false
       },
       {
@@ -3519,7 +3519,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-533FF8",
+        "buyer_id": "BUYER-6BCA29",
         "is_conversion": false
       },
       {
@@ -3547,7 +3547,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-278B98",
+        "buyer_id": "BUYER-AC9B50",
         "is_conversion": false
       },
       {
@@ -3561,7 +3561,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-0C2CB6",
+        "buyer_id": "BUYER-CB9EE7",
         "is_conversion": false
       },
       {
@@ -3918,7 +3918,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-48E03D",
+        "buyer_id": "BUYER-D0F563",
         "is_conversion": false
       },
       {
@@ -3932,7 +3932,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-48E03D",
+        "buyer_id": "BUYER-D0F563",
         "is_conversion": false
       },
       {
@@ -3946,7 +3946,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-C401E9",
+        "buyer_id": "BUYER-397632",
         "is_conversion": false
       },
       {
@@ -3960,7 +3960,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-C401E9",
+        "buyer_id": "BUYER-397632",
         "is_conversion": false
       },
       {
@@ -3974,7 +3974,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-48E03D",
+        "buyer_id": "BUYER-D0F563",
         "is_conversion": false
       },
       {
@@ -3988,7 +3988,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-48E03D",
+        "buyer_id": "BUYER-D0F563",
         "is_conversion": false
       },
       {
@@ -4002,7 +4002,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-C401E9",
+        "buyer_id": "BUYER-397632",
         "is_conversion": false
       },
       {
@@ -4016,7 +4016,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-C401E9",
+        "buyer_id": "BUYER-397632",
         "is_conversion": false
       }
     ]
@@ -4093,7 +4093,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-356464",
+        "buyer_id": "BUYER-53DD0F",
         "is_conversion": false
       },
       {
@@ -4163,7 +4163,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-BF14D9",
+        "buyer_id": "BUYER-C082AF",
         "is_conversion": false
       }
     ]
@@ -4401,7 +4401,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-704AF6",
+        "buyer_id": "BUYER-52631D",
         "is_conversion": false
       },
       {
@@ -4415,7 +4415,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-3B4336",
+        "buyer_id": "BUYER-24B9C4",
         "is_conversion": false
       },
       {
@@ -4534,7 +4534,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-ADF12D",
+        "buyer_id": "BUYER-1D5C47",
         "is_conversion": false
       },
       {
@@ -4604,7 +4604,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-E34DF2",
+        "buyer_id": "BUYER-A3720C",
         "is_conversion": false
       }
     ]
@@ -4814,7 +4814,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-38FE30",
+        "buyer_id": "BUYER-549B6D",
         "is_conversion": false
       },
       {
@@ -4842,7 +4842,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-BFA1B1",
+        "buyer_id": "BUYER-4F79A1",
         "is_conversion": false
       },
       {
@@ -4856,7 +4856,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-EBA2A0",
+        "buyer_id": "BUYER-C1EA90",
         "is_conversion": false
       },
       {
@@ -4898,7 +4898,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-47CDBA",
+        "buyer_id": "BUYER-09E3FB",
         "is_conversion": false
       }
     ]
@@ -4961,7 +4961,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-E77BB8",
+        "buyer_id": "BUYER-DDE1CD",
         "is_conversion": false
       },
       {
@@ -5003,7 +5003,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-FE7F01",
+        "buyer_id": "BUYER-8C28A8",
         "is_conversion": false
       },
       {
@@ -5241,7 +5241,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-AB52F5",
+        "buyer_id": "BUYER-34F54F",
         "is_conversion": false
       },
       {
@@ -5269,7 +5269,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-198CEF",
+        "buyer_id": "BUYER-881106",
         "is_conversion": false
       },
       {
@@ -5311,7 +5311,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-DA293A",
+        "buyer_id": "BUYER-6E27E9",
         "is_conversion": false
       },
       {
@@ -5339,7 +5339,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-F503E4",
+        "buyer_id": "BUYER-8B322A",
         "is_conversion": false
       }
     ]
@@ -5444,7 +5444,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-94B1A9",
+        "buyer_id": "BUYER-6EE271",
         "is_conversion": false
       },
       {
@@ -5472,7 +5472,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-6E0B97",
+        "buyer_id": "BUYER-679D27",
         "is_conversion": false
       },
       {
@@ -5486,7 +5486,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-D01BA5",
+        "buyer_id": "BUYER-EEE15D",
         "is_conversion": false
       }
     ]
@@ -5633,7 +5633,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "BTC",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-0B66DE",
+        "buyer_id": "BUYER-7A40B5",
         "is_conversion": false
       }
     ]
@@ -5696,7 +5696,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-279ED6",
+        "buyer_id": "BUYER-5C3F60",
         "is_conversion": false
       },
       {
@@ -5724,7 +5724,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-A163B4",
+        "buyer_id": "BUYER-4EC79E",
         "is_conversion": false
       },
       {
@@ -5752,7 +5752,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-D81F06",
+        "buyer_id": "BUYER-A1BB95",
         "is_conversion": false
       },
       {
@@ -5766,7 +5766,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "USDT",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-C60845",
+        "buyer_id": "BUYER-538BA4",
         "is_conversion": false
       },
       {
@@ -5829,7 +5829,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "XRP",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-C2728D",
+        "buyer_id": "BUYER-5E6CCF",
         "is_conversion": false
       },
       {
@@ -5885,7 +5885,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-466242",
+        "buyer_id": "BUYER-282B42",
         "is_conversion": false
       },
       {
@@ -5899,7 +5899,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "ETH",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-527245",
+        "buyer_id": "BUYER-645AC6",
         "is_conversion": false
       },
       {
@@ -5927,7 +5927,7 @@
         "asset_type": "CRYPTO",
         "crypto_symbol": "SOL",
         "wallet_type": "exchange_wallet",
-        "buyer_id": "BUYER-145D23",
+        "buyer_id": "BUYER-065120",
         "is_conversion": false
       }
     ]

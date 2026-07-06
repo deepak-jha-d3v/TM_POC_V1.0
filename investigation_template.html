@@ -326,6 +326,9 @@
   .notes-field select{width:100%;border:1px solid var(--line-strong);border-radius:8px;padding:9px 12px;
     font-family:var(--sans);font-size:13px;background:var(--panel-2);}
   .notes-field select:focus{outline:2px solid var(--accent-soft);border-color:var(--accent);background:#fff;}
+  .notes-field textarea{width:100%;border:1px solid var(--line-strong);border-radius:8px;padding:9px 12px;
+    font-family:var(--sans);font-size:13px;background:var(--panel-2);resize:vertical;}
+  .notes-field textarea:focus{outline:2px solid var(--accent-soft);border-color:var(--accent);background:#fff;}
   @media (max-width:900px){.notes-grid{grid-template-columns:1fr;}}
   select.decision-rationale{width:100%;margin-top:12px;border:1px solid var(--line-strong);border-radius:8px;padding:10px 12px;
     font-family:var(--sans);font-size:13px;background:var(--panel-2);}
@@ -465,7 +468,7 @@ function saveDecisionsToStorage(){
 }
 
 function getNotes(alertId){
-  if(!notesState[alertId]) notesState[alertId] = {summary:'',observations:'',evidence:'',decision:'',recommendation:''};
+  if(!notesState[alertId]) notesState[alertId] = {summary:'',observations:'',evidence:'',decision:'',recommendation:'',additional_notes:''};
   return notesState[alertId];
 }
 function updateNote(alertId, field, value){
@@ -1255,8 +1258,7 @@ const NOTE_OPTIONS = {
   decision: ["Close — False Positive","Escalate to L2 / SAR Review","Request More Information","File Suspicious Activity Report (SAR)","No Action — Continue Monitoring"],
   recommendation: ["No further action required","Continue monitoring — no change to risk rating","Request additional documentation from customer","Refer to compliance for enhanced due diligence (EDD)","Escalate to L2/SAR review team","Update customer risk rating"],
 };
-const NOTE_LABELS = {summary:'Summary', observations:'Observations', evidence:'Supporting Evidence', decision:'Decision', recommendation:'Recommendation'};
-
+const NOTE_LABELS = {summary:'Summary', observations:'Observations', evidence:'Supporting Evidence', decision:'Decision', recommendation:'Recommendation', additional_notes:'Additional Notes'};
 function buildNotes(a){
   const n = getNotes(a.alert_id);
   const field = (key)=>{
@@ -1268,12 +1270,18 @@ function buildNotes(a){
       </select>
     </div>`;
   };
+  const freeTextField = `<div class="notes-field" style="grid-column:1 / -1">
+    <label>${NOTE_LABELS.additional_notes}</label>
+    <textarea rows="4" placeholder="Add any additional context, rationale, or observations not covered above…"
+      onchange="updateNote('${a.alert_id}','additional_notes',this.value)">${n.additional_notes || ''}</textarea>
+  </div>`;
   return `<div class="notes-grid">
     ${field('summary')}
     ${field('observations')}
     ${field('evidence')}
     ${field('decision')}
     ${field('recommendation')}
+    ${freeTextField}
   </div>`;
 }
 
@@ -1331,7 +1339,7 @@ function renderMain(preserveScroll){
     ['ubo', '🏢', 'UBO Details', inv.ubo ? flagPill(inv.ubo.shareholders.some(s=>s.pep_flag==='Y'||s.sanctions_flag==='Y'), 'Review') : `<span class="sec-flag flag-neutral">N/A</span>`, buildUbo(inv), false],
     ['flags', '🚦', 'Risk Indicators (Red Flag Analysis)', flagPill(inv.red_flags.some(f=>f.triggered==='Y'), `${inv.red_flags.filter(f=>f.triggered==='Y').length} triggered`), buildRedFlags(inv), false],
     ['rec', '🧭', 'Recommended Decision (system)', `<span class="sec-flag flag-neutral">${inv.recommendation.decision}</span>`, buildRecommendation(a, inv, decided), true],
-    ['notes', '📝', 'Investigation Notes', null, buildNotes(a), false],
+    ['notes', '📝', 'Investigation Notes', null, buildNotes(a), true],
     ['audit', '🕓', 'Case Audit Trail', null, buildAuditTrail(a, inv, decided), false],
     ['sla', '⏱️', 'SLA Tracker', `<span class="sla-status-pill sla-${inv.sla.status.replace(/\s+/g,'-')}" style="margin-left:10px">${inv.sla.status}</span>`, buildSla(inv), false],
   ];
